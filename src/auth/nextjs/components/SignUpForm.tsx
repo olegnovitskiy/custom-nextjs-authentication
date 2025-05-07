@@ -37,6 +37,12 @@ export function SignUpForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {error && <p className="text-destructive">{error}</p>}
         <div className="flex gap-4">
+        <Button
+            type="button"
+            onClick={async () => await oAuthSignIn("google")}
+          >
+            Google
+          </Button>
           <Button
             type="button"
             onClick={async () => await oAuthSignIn("discord")}
