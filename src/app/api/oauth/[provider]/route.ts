@@ -22,8 +22,6 @@ export async function GET(
   const state = request.nextUrl.searchParams.get("state")
   const provider = z.enum(oAuthProviders).parse(rawProvider)
 
-  console.log(`code: ${code}, state: ${state}, provider: ${provider}`)
-
   if (typeof code !== "string" || typeof state !== "string") {
     redirect(
       `/sign-in?oauthError=${encodeURIComponent(
@@ -38,7 +36,6 @@ export async function GET(
     const user = await connectUserToAccount(oAuthUser, provider)
     await createUserSession(user, await cookies())
   } catch (error) {
-    console.log('HERE')
     console.error(error)
     redirect(
       `/sign-in?oauthError=${encodeURIComponent(
